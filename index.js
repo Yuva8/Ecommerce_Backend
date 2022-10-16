@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const http = require("http");
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 const stripe = require("stripe")(
   "sk_test_51Lt5jhSIoT8EdXhQLGwV2sso0nDDKWHQ1Ze6x6756x2zfD447Ja5i9obxriEwJGfCCjtHll3gMWI79lodCZMFVNS001Vjqpnhk"
 );
@@ -54,9 +55,9 @@ app.post("/create-payment", async (req, res) => {
     res.status(400).json(e.message);
   }
 });
-
-server.listen(4040, () => {
-  console.log("server running at port", 4040);
+const PORT = process.env.PORT || 4040;
+server.listen(PORT, () => {
+  console.log(`Port is running on ${PORT}`);
 });
 
 app.set("socketio", io);
